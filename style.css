@@ -25,8 +25,10 @@
 #display {
   background-color: azure;
   margin: auto;
-  height: 275px;
+  height: 255px;
   border-radius: 10px;
+  font-size: xx-large;
+  padding: 10px;
 }
 
 
@@ -45,11 +47,13 @@
   grid-column: 4;
   grid-row: 4 / 6;
 }
-#button-area > button {
-  background-color: black;
+#button-area > button {  
   border-radius: 10px;
   color: white;
   font-size: xx-large;
+}
+.num-btn {
+  background-color: black;
 }
 .op-btn {
   background-color: darkgray !important;
