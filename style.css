@@ -1,0 +1,59 @@
+#calculator {
+  margin: 60px auto;
+  width: 400px;
+}
+
+
+#display-area {
+  background-color: black;
+  border-style: solid solid none;
+  border-radius: 15px 15px 0 0;  /* or 10px? */
+  padding: 0 15px 30px; 
+}
+#top {
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+#solar-panel {
+  background-color: #49312C;
+  width: 100px;
+  height: 35px;
+  margin: auto 0;
+}
+#display {
+  background-color: azure;
+  margin: auto;
+  height: 275px;
+  border-radius: 10px;
+}
+
+
+#button-area {
+  background-color: lightgray;
+  border-style: none solid solid;
+  border-radius: 0 0 15px 15px;
+  height: 320px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-row-gap: 10px;
+  grid-column-gap: 15px;
+  padding: 15px;  
+}
+#plus {
+  grid-column: 4;
+  grid-row: 4 / 6;
+}
+#button-area > button {
+  background-color: black;
+  border-radius: 10px;
+  color: white;
+  font-size: xx-large;
+}
+.op-btn {
+  background-color: darkgray !important;
+}
+.clear-btn {
+  background-color: #B77587 !important;  /* or lightcoral? */
+}
