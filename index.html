@@ -17,7 +17,12 @@
                 <div id="solar-panel"></div>
                 <p>SICA-01</p>
             </div>
-            <div id="display"></div>
+            <div id="display">
+                <p id="line1"></p>
+                <p id="line2"></p>
+                <p id="line3"></p>
+                <p id="line4"></p>
+            </div>
         </div>
         <div id="button-area">
             <button type="button" class="clear-btn">AC</button>
@@ -40,6 +45,13 @@
             <button type="button" class="num-btn">.</button>
             <button type="button" class="op-btn">=</button>
         </div>
+    </div>
+    <div id="debug-display-lines">
+        <h2>Current Active Line: <span id="debug-line-num">4</span></h2>
+        <button type="button" class="line-btn">1</button>
+        <button type="button" class="line-btn">2</button>
+        <button type="button" class="line-btn">3</button>
+        <button type="button" class="line-btn">4</button>
     </div>
     <script src="calc.js"></script>
 </body>

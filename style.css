@@ -30,6 +30,12 @@
   font-size: xx-large;
   padding: 10px;
 }
+#display > p {
+  height: 1em;
+  margin: 15px 0;
+  width: 40px;
+  text-overflow: clip;
+}
 
 
 #button-area {
@@ -60,4 +66,17 @@
 }
 .clear-btn {
   background-color: #B77587 !important;  /* or lightcoral? */
+}
+
+
+#debug-display-lines {
+  width: 400px;
+  margin: 0 auto;
+  position: relative;
+  top: -500px;
+  left: 450px;
+}
+#debug-display-lines > button {
+  padding: 10px 20px;
+  margin: 0 5px;
 }
