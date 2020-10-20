@@ -1,8 +1,11 @@
 // get display and button elements
-var inputLine      = document.querySelector('#line4');
+var inputLine      = document.querySelector('#line4'); // should be changed to const once debugging the display lines is finished
+const displayLines = document.querySelectorAll('#display p'); 
 const numButtons   = document.querySelectorAll('.num-btn');
 const opButtons    = document.querySelectorAll('.op-btn');
-const clearButtons = document.querySelectorAll('.clear-btn');
+const cButton      = document.querySelector('#c-btn');
+const acButton     = document.querySelector('#ac-btn');
+
 
 // send text to the display when buttons are clicked
 numButtons.forEach(button => {
@@ -17,11 +20,14 @@ opButtons.forEach(button => {
     });
 });
 
-// both clear buttons will clear the current line for now
-clearButtons.forEach(button => {
-    button.addEventListener('mousedown', () => {
-        inputLine.innerText = "";
-    });
+// clear button will clear the current line for now
+cButton.addEventListener('mousedown', () => {
+    inputLine.innerText = "";
+});
+
+// all clear button clears everything on the display
+acButton.addEventListener('mousedown', () => {
+    clearDisplay();
 });
 
 // the valid keys that can be pressed on the keyboard
@@ -45,3 +51,9 @@ document.querySelectorAll('.line-btn').forEach(button => {
         activeLineNum.innerText = button.innerText;
     });
 });
+
+function clearDisplay() {
+    displayLines.forEach((line) => {
+        line.innerText = "";
+    });
+}
