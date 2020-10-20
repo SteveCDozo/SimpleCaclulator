@@ -7,13 +7,13 @@ const clearButtons = document.querySelectorAll('.clear-btn');
 // send text to the display when buttons are clicked
 numButtons.forEach(button => {
     button.addEventListener('mousedown', () => {
-        inputLine.innerText += button.innerText;
+        write(button.innerText);
     });
 });
 
 opButtons.forEach(button => {
     button.addEventListener('mousedown', () => {
-        inputLine.innerText += button.innerText;
+        write(button.innerText);
     });
 });
 
@@ -27,9 +27,9 @@ clearButtons.forEach(button => {
 // the valid keys that can be pressed on the keyboard
 const validKeys = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.', '+', '-', '*', '/', '=']; //, 'Enter'];
 document.addEventListener('keypress', event => {
-    if (validKeys.includes(event.key))
-        inputLine.innerText += event.key;
-    else if (event.key == 'Enter') {
+    if (validKeys.includes(event.key)) {
+        write(event.key);
+    } else if (event.key == 'Enter') {
         for (let x = 1; x < 4; ++x) {
             document.querySelector('#line'+x).innerText = document.querySelector('#line'+(x+1)).innerText;
         }
@@ -45,3 +45,11 @@ document.querySelectorAll('.line-btn').forEach(button => {
         activeLineNum.innerText = button.innerText;
     });
 });
+
+function write(text) {
+    var currentText = inputLine.innerText;
+    inputLine.innerText = "";
+    window.setTimeout(() => {
+        inputLine.innerText = currentText + text;
+    }, 200);
+}
