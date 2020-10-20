@@ -6,6 +6,7 @@ const opButtons    = document.querySelectorAll('.op-btn');
 const cButton      = document.querySelector('#c-btn');
 const acButton     = document.querySelector('#ac-btn');
 
+var num1, num2, op;
 
 // send text to the display when buttons are clicked
 numButtons.forEach(button => {
@@ -20,9 +21,9 @@ opButtons.forEach(button => {
     });
 });
 
-// clear button will clear the current line for now
+// clear button clears the last digit/operation (entry) entered
 cButton.addEventListener('mousedown', () => {
-    inputLine.innerText = "";
+    clearEntry();
 });
 
 // all clear button clears everything on the display
@@ -51,6 +52,18 @@ document.querySelectorAll('.line-btn').forEach(button => {
         activeLineNum.innerText = button.innerText;
     });
 });
+
+function clearEntry() {
+    // essentially removing the last entered number/operation on the input line
+    if (num1 == null) 
+        return;
+    else if (op == null)
+        inputLine.innerText = "";    
+    else if (num2 == null)
+        inputLine.innerText = num1;
+    else
+        inputLine.innerText = num1 + op;
+}
 
 function clearDisplay() {
     displayLines.forEach((line) => {
