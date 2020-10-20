@@ -69,14 +69,14 @@
 }
 
 
-#debug-display-lines {
+#debug-info {
   width: 400px;
   margin: 0 auto;
   position: relative;
-  top: -500px;
+  top: -750px;
   left: 450px;
 }
-#debug-display-lines > button {
+#debug-info > button {
   padding: 10px 20px;
   margin: 0 5px;
 }
