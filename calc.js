@@ -57,3 +57,39 @@ function clearDisplay() {
         line.innerText = "";
     });
 }
+
+// temporary button to remove/add borders (for viewing different calculator looks)
+const borderButton = document.querySelector('#border-test');
+borderButton.addEventListener('click', () => {
+    if (borderButton.innerText == "no border") {
+        document.querySelectorAll('.design-1 .clear-btn').forEach(button => {
+            button.style['border-color'] = "#B77587";
+        });
+        document.querySelectorAll('.design-1 .op-btn').forEach(button => {
+            button.style['border-color'] = "darkgray";
+        });
+        document.querySelectorAll('.design-1 .num-btn').forEach(button => {
+            button.style['border-color'] = "#2e2d2c";
+        });
+        borderButton.innerText = "add border";
+    } else {
+        document.querySelectorAll('.design-1 button').forEach(button => {
+            button.style['border-color'] = "gray";
+        });
+        borderButton.innerText = "no border";
+    }
+});
+
+// temporary button to view the 3d effect (for viewing different calculator looks)
+const lookButton = document.querySelector('#look-test');
+lookButton.addEventListener('click', () => {
+    if (lookButton.innerText == "3d on") {
+        document.querySelector('#calculator').className += ' design-1-calc';
+        document.querySelector('#button-area').className += ' design-1';
+        lookButton.innerText = "3d off";
+    } else {
+        document.querySelector('#calculator').className = '';
+        document.querySelector('#button-area').className = '';
+        lookButton.innerText = "3d on";
+    }
+});

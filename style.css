@@ -53,19 +53,22 @@
   grid-column: 4;
   grid-row: 4 / 6;
 }
-#button-area > button {  
+#button-area > button {
   border-radius: 10px;
   color: white;
   font-size: xx-large;
+  outline: none;
 }
+/* remove button-area class from css and html after testing and add this line above */
+
 .num-btn {
   background-color: black;
 }
 .op-btn {
-  background-color: darkgray !important;
+  background-color: darkgray;
 }
 .clear-btn {
-  background-color: #B77587 !important;  /* or lightcoral? */
+  background-color: #B77587;  /* or lightcoral? */
 }
 
 
@@ -78,5 +81,139 @@
 }
 #debug-display-lines > button {
   padding: 10px 20px;
-  margin: 0 5px;
+  margin: 0 5px;  
 }
+
+#border-test {
+  position: relative;
+  transition: linear all 100ms;
+  outline: none;
+}
+#border-test:active {
+  transform: translate(5px, 5px);
+}
+#border-test::before {
+  content: "";
+  background-color: gray;
+  position: absolute;
+  width: 105%;
+  height: 10px;
+  bottom: -12px;
+  left: 3px;
+  transform: skewX(45deg);
+  transition: linear all 100ms;
+}
+#border-test:active::before {
+  height: 5px;
+  transform: skewX(45deg) translate(3px, -5px);
+  /*
+  bottom: -7px;
+  left: 1px;
+  */
+}
+#border-test::after {
+  content: "";
+  background-color: darkgray;
+  position: absolute;
+  width: 10px;
+  height: 110%;
+  bottom: -7px;
+  right: -12px;
+  transform: skewY(45deg);
+  transition: linear all 100ms;
+}
+#border-test:active::after {
+  width: 5px;
+  transform: skewY(45deg) translate(-5px, 2px);
+  /*
+  top: 1px;
+  right: -7px;
+  */
+}
+
+
+.design-1 > button {   
+  border-radius: 0px !important;
+  border-style: solid; 
+  position: relative;
+  top: -5px;
+  left: -5px;
+  transition: linear all 100ms;
+}
+.design-1 > .num-btn {
+  background-color: #2e2d2c;
+}
+.design-1 > .clear-btn::before {
+  background-color: #7a4856;
+}
+.design-1 > .clear-btn::after {
+  background-color: #a06373;
+}
+.design-1 > .op-btn::before {
+  background-color: rgb(114, 113, 113);
+}
+.design-1 > .op-btn::after {
+  background-color: rgb(145, 144, 144);
+}
+.design-1 > button::before,
+.design-1 > button::after {
+  content: "";
+  position: absolute;
+  transition: linear all 100ms;
+}
+.design-1 > button::before {
+  background-color: black;
+  width: 105%;
+  height: 5px;
+  bottom: -7px;
+  left: 1px;
+  transform: skewX(45deg);
+}
+.design-1 > button::after {
+  background-color: #242221;
+  width: 5px;
+  height: 107%;
+  top: 1px;
+  right: -7px;
+  transform: skewY(45deg);
+}
+.design-1 > #plus::after {
+  height: 103%;
+}
+.design-1 > button:active {
+  transform: translate(3px, 3px);
+}
+.design-1 > button:active::before {
+  height: 2px;
+  transform: skewX(45deg) translate(1px, -3px);
+}
+.design-1 > button:active::after {
+  width: 2px;
+  transform: skewY(45deg) translate(-3px, 1px);
+}
+.design-1-calc {
+  box-shadow: 10px 10px rgb(77, 74, 74);
+  border-radius: 15px;
+}
+/*
+.design-1-calc {
+  position: relative;
+}
+.design-1-calc::before,
+.design-1-calc::after {
+  content: "";
+  position: absolute;
+  background-color: darkgray;
+}
+.design-1-calc::before {
+  height: 5px;
+  width: 100%;
+  bottom: -5px;
+}
+.design-1-calc::after {
+  width: 5px;
+  height: 100%;
+  top: 0px;
+  right: -5px;
+}
+*/
