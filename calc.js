@@ -6,15 +6,17 @@ const opButtons    = document.querySelectorAll('.op-btn');
 const cButton      = document.querySelector('#c-btn');
 const acButton     = document.querySelector('#ac-btn');
 
-var num1 = "", num2 = "", op = "", ans = "";
+var num1 = "", num2 = "", op = "", ans = "0";
+
 
 // for debugging
 const debugOp   = document.querySelector('#debug-op');
+const debugAns  = document.querySelector('#debug-ans');
 const debugNum1 = document.querySelector('#debug-num1');
 const debugNum2 = document.querySelector('#debug-num2');
 
 
-// send text to the display when buttons are clicked
+// add listeners to buttons
 numButtons.forEach(button => {
     button.addEventListener('mousedown', () => {
         processNum(button.innerText);
@@ -30,15 +32,13 @@ opButtons.forEach(button => {
 // clear button will clear the current line for now
 cButton.addEventListener('mousedown', () => {
     inputLine.innerText = "";
-    clearNumOp();
-    updateDebugInfo();
+    clearNumOp();    
 });
 
 // all clear button clears everything on the display
-acButton.addEventListener('mousedown', () => {
-    clearNumOp();
-    ans = ""; // Clear memory of previous answer as well 
+acButton.addEventListener('mousedown', () => {    
     clearDisplay();
+    clearMemory();
 });
 
 // the valid keys that can be pressed on the keyboard
@@ -63,12 +63,6 @@ document.querySelectorAll('.line-btn').forEach(button => {
     });
 });
 
-function clearDisplay() {
-    displayLines.forEach((line) => {
-        line.innerText = "";
-    });
-    updateDebugInfo();
-}
 
 function processNum(digit) {
     write(digit);
@@ -85,9 +79,80 @@ function processOp(operation) {
     if (operation == "=") {
         // Ignore "=" if expression is not complete
         if (num1 && op && num2) {
-            ans = processExpression();
+            processExpression();
         }
-    } else if (operation == "+/-") {
+    } else {
+        // If second number exists, process current expression, and set num1 to the answer    
+        if (num2) {
+            processExpression();
+            num1 = ans;
+            write(num1);        
+        } 
+        // If first number doesn't exist, bring the previous answer as num1
+        else if (!num1) { 
+            num1 = ans;
+            write(num1);
+        }
+        op = operation;
+        write(op);
+    }
+    updateDebugInfo();
+}
+
+function processExpression() {
+    ans = "ANS";
+    write("="+ans);
+    advanceLines(); // Move this expression into the log now
+    clearNumOp();   // Clear num and op upon processing expression, and get ready for next
+}
+
+function write(text) {
+    inputLine.innerText += text;
+}
+
+function advanceLines() {
+    for (let x = 1; x < 4; ++x) {
+        document.querySelector('#line'+x).innerText = document.querySelector('#line'+(x+1)).innerText;
+    }
+    inputLine.innerText = "";
+}
+
+function clearDisplay() {
+    displayLines.forEach((line) => {
+        line.innerText = "";
+    });
+}
+
+function clearNumOp() {
+    op = "";
+    num1 = "";
+    num2 = "";
+    updateDebugInfo();
+}
+
+function clearMemory() {
+    clearNumOp();
+    ans = "0";
+    updateDebugInfo();
+}
+
+function updateDebugInfo() {
+    debugOp.innerText   = op;
+    debugAns.innerText  = ans;
+    debugNum1.innerText = num1;
+    debugNum2.innerText = num2;    
+}
+
+
+
+/*
+
+// Erase last input from end of input line
+function erase(text) {
+    inputLine.innerText = inputLine.innerText.slice(0, inputLine.innerText.length - text.length);
+}
+
+ else if (operation == "+/-") {
         if (num2) {
             erase(num2);
             num2 = -1 * parseInt(num2);
@@ -99,70 +164,5 @@ function processOp(operation) {
             num1 = num1.toString();
             write(num1);
         }
-    } else {
-        // If second number exists, process expression, and make num1 the answer
-        if (num2) {
-            ans = processExpression();
-            // Below two lines can be deleted, as processing expression will clear num1 
-            // and lead into the next if statement
-            num1 = ans;
-            write(num1);
-        } 
-        // If first number doesn't exist, bring the previous answer as num1
-        if (!num1) {
-            num1 = ans;
-            write(num1);
-        }
-        op = operation;
-        write(op);
-    }
-    // if (operation == "=") {
-    //     processExpression();
-    // } else {        
-    //     // if there's already a second number, then first process the current expresion before overwriting op
-    //     if (num2 != "") {
-    //         num1 = processExpression();
-    //         write(num1);
-    //     }
-    //     op = operation;  
-    //     write(op);               
-    // }
-    updateDebugInfo();
-}
-
-function processExpression() {
-    const ans = "ANS";
-    write("="+ans);
-    advanceLines();
-    clearNumOp(); // Clear num and op upon processing expression, and get ready for next
-    return ans;
-}
-
-function write(text) {
-    inputLine.innerText += text;
-}
-
-// Erase last input from end of input line
-function erase(text) {
-    inputLine.innerText = inputLine.innerText.slice(0, inputLine.innerText.length - text.length);
-}
-
-function advanceLines() {
-    for (let x = 1; x < 4; ++x) {
-        document.querySelector('#line'+x).innerText = document.querySelector('#line'+(x+1)).innerText;
-    }
-    inputLine.innerText = "";
-}
-
-function updateDebugInfo() {
-    debugOp.innerText   = op;
-    debugNum1.innerText = num1;
-    debugNum2.innerText = num2;
-}
-
-// Clear num1, num2, and op
-function clearNumOp() {
-    op = "";
-    num1 = "";
-    num2 = "";
-}
+    } 
+*/
