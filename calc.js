@@ -1,3 +1,5 @@
+const ADD = "+", SUB = "-", MULT = "×", DIV = "÷", SIGN = "+/-", EQ = "=";
+
 // get display and button elements
 var inputLine      = document.querySelector('#line4'); // should be changed to const once debugging the display lines is finished
 const displayLines = document.querySelectorAll('#display p'); 
@@ -76,7 +78,7 @@ function processNum(digit) {
 }
 
 function processOp(operation) {
-    if (operation == "=") {
+    if (operation == EQ) {
         // Ignore "=" if expression is not complete
         if (num1 && op && num2) {
             processExpression();
@@ -100,8 +102,19 @@ function processOp(operation) {
 }
 
 function processExpression() {
-    ans = "ANS";
-    write("="+ans);
+    ans = "";
+    if (op == ADD)
+        ans += (+num1) + (+num2); // using unary plus operator to convert string to number
+    else if (op == SUB)
+        ans += (+num1) - (+num2);
+    else if (op == MULT)
+        ans += (+num1) * (+num2);
+    else if (op == DIV)
+        ans += (+num1) / (+num2);
+    else
+        ans = "ERROR";
+
+    write("=" + ans);
     advanceLines(); // Move this expression into the log now
     clearNumOp();   // Clear num and op upon processing expression, and get ready for next
 }
