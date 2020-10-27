@@ -83,6 +83,8 @@ function processOp(operation) {
         if (num1 && op && num2) {
             processExpression();
         }
+    } else if (operation == SIGN) {
+        processSignChange();
     } else {
         // If second number exists, process current expression, and set num1 to the answer    
         if (num2) {
@@ -119,8 +121,35 @@ function processExpression() {
     clearNumOp();   // Clear num and op upon processing expression, and get ready for next
 }
 
+function processSignChange() {
+    // if the op is set, that means we should switch the sign of num2
+    if (op) {
+        if (isNegative(num2))
+            num2 = num2.substring(1);
+        else
+            num2 = "-" + num2;
+    } 
+    // otherwise, switch the sign of num1 
+    else  {
+        if (isNegative(num1))
+            num1 = num1.substring(1);
+        else
+            num1 = "-" + num1;        
+    }
+    // overwrite the inputline to reflect the sign change
+    overwrite();
+}
+
+function isNegative(num) {
+    return num[0] == '-';        
+}
+
 function write(text) {
     inputLine.innerText += text;
+}
+
+function overwrite(text) {
+    inputLine.innerText = num1 + op + num2;
 }
 
 function advanceLines() {
@@ -155,27 +184,3 @@ function updateDebugInfo() {
     debugNum1.innerText = num1;
     debugNum2.innerText = num2;    
 }
-
-
-
-/*
-
-// Erase last input from end of input line
-function erase(text) {
-    inputLine.innerText = inputLine.innerText.slice(0, inputLine.innerText.length - text.length);
-}
-
- else if (operation == "+/-") {
-        if (num2) {
-            erase(num2);
-            num2 = -1 * parseInt(num2);
-            num2 = num2.toString();
-            write(num2);
-        } else if (num1 && !op) {
-            erase(num1);
-            num1 = -1 * parseInt(num1);
-            num1 = num1.toString();
-            write(num1);
-        }
-    } 
-*/
