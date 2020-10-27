@@ -97,8 +97,13 @@ function processOp(operation) {
             num1 = ans;
             write(num1);
         }
+        // If op already exists, then we need to overwrite it on the display
+        if (op)
+            overwrite(num1 + operation);
+        else
+            write(operation);
+        
         op = operation;
-        write(op);
     }
     updateDebugInfo();
 }
@@ -137,7 +142,7 @@ function processSignChange() {
             num1 = "-" + num1;        
     }
     // overwrite the inputline to reflect the sign change
-    overwrite();
+    overwrite(num1 + op + num2);
 }
 
 function isNegative(num) {
@@ -149,7 +154,7 @@ function write(text) {
 }
 
 function overwrite(text) {
-    inputLine.innerText = num1 + op + num2;
+    inputLine.innerText = text;
 }
 
 function advanceLines() {
