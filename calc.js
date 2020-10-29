@@ -248,3 +248,16 @@ document.querySelectorAll('.style-btn').forEach(button => {
         }        
     });
 });
+
+// buttons to select the current line style on the display (for debugging purposes)
+const activeFontNum = document.querySelector('#debug-font-num');
+document.querySelectorAll('.font-btn').forEach(button => {
+    button.addEventListener('click', () => {
+        activeFontNum.innerText = button.innerText;
+        const display = document.querySelector('#display');
+        if (button.innerText == 0)
+            display.style['font-family'] = 'Times New Roman';
+        else
+            display.style['font-family'] = 'calculatorFont'+button.innerText;                
+    });
+});

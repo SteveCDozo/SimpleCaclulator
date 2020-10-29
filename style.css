@@ -1,3 +1,34 @@
+@font-face {
+  font-family: calculatorFont1;
+  src: url(Calculator.ttf);
+}
+@font-face {
+  font-family: calculatorFont2;
+  src: url(digital-7.ttf);
+}
+@font-face {
+  font-family: calculatorFont3;
+  src: url(alarm_clock.ttf);
+}
+@font-face {
+  font-family: calculatorFont4;
+  src: url(digital.ttf);
+}
+@font-face {
+  font-family: calculatorFont5;
+  src: url(lcd.ttf);
+}
+@font-face {
+  font-family: calculatorFont6;
+  src: url(Technology.ttf);
+}
+
+@font-face {
+  font-family: calculatorFont7;
+  src: url(Seven.ttf);
+}
+
+
 #calculator {
   margin: 60px auto;
   width: 400px;
