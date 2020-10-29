@@ -27,13 +27,15 @@
   margin: auto;
   height: 255px;
   border-radius: 10px;
-  font-size: xx-large;
+  font-size: xxx-large;
   padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 #display > p {
   height: 1em;
-  margin: 15px 0;
-  width: 344px;
+  margin: 0;
   text-align: right;
 }
 #display .neg {

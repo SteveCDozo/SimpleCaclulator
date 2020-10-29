@@ -1,8 +1,9 @@
 const ADD = "+", SUB = "-", MULT = "×", DIV = "÷", SIGN = "+/-", EQ = "=";
 
 // get display and button elements
-var inputLine      = document.querySelector('#line4'); // should be changed to const once debugging the display lines is finished
-const displayLines = document.querySelectorAll('#display p'); 
+var inputLine      = document.querySelector('#line4');
+var displayLines = document.querySelectorAll('#display p'); // change back to const after choosing a line style
+var lineCount = 4;
 const numButtons   = document.querySelectorAll('.num-btn');
 const opButtons    = document.querySelectorAll('.op-btn');
 const cButton      = document.querySelector('#c-btn');
@@ -56,15 +57,6 @@ document.addEventListener('keypress', event => {
     }
 });
 
-// buttons to select the current active line on the display (for debugging purposes)
-const activeLineNum = document.querySelector('#debug-line-num');
-document.querySelectorAll('.line-btn').forEach(button => {
-    button.addEventListener('click', () => {
-        inputLine = document.querySelector('#line'+button.innerText);
-        activeLineNum.innerText = button.innerText;
-    });
-});
-
 
 function processNum(digit) {
     write(digit);
@@ -99,7 +91,7 @@ function processOp(operation) {
         }
         // If op already exists, then we need to overwrite it on the display
         if (op)
-            overwriteOp(operation);
+            overwrite(operation);
         else
             write(operation);
         
@@ -121,8 +113,14 @@ function processExpression() {
     else
         ans = "ERROR";
 
-    write("=" + ans);
-    advanceLines(); // Move this expression into the log now
+    if (lineCount == 4) {
+        write("=" + ans);
+        advanceLines(); // Move this expression into the log now
+    } else {
+        advanceLines();
+        write(ans);
+        advanceLines();
+    }
     clearNumOp();   // Clear num and op upon processing expression, and get ready for next
 }
 
@@ -173,7 +171,7 @@ function formatNum(num) {
 }
 
 function advanceLines() {
-    for (let x = 1; x < 4; ++x) {
+    for (let x = 1; x < lineCount; ++x) {
         var currLine = document.querySelector('#line'+x);
         var nextLine = document.querySelector('#line'+(x+1));
 
@@ -214,3 +212,39 @@ function updateDebugInfo() {
     debugNum1.innerText = num1;
     debugNum2.innerText = num2;    
 }
+
+
+// buttons to select the current line style on the display (for debugging purposes)
+const activeStyleNum = document.querySelector('#debug-style-num');
+document.querySelectorAll('.style-btn').forEach(button => {
+    button.addEventListener('click', () => {
+        activeStyleNum.innerText = button.innerText;        
+        const display = document.querySelector('#display');
+        clearDisplay();
+        clearMemory();
+
+        if (button.innerText == 1) {
+            display.innerHTML = 
+                `<p id="line1"></p>
+                <p id="line2"></p>
+                <p id="line3"></p>
+                <p id="line4"></p>`;
+            display.style['font-size'] = 'xxx-large';
+            displayLines = document.querySelectorAll('#display p');
+            lineCount = 4;
+            inputLine = document.querySelector('#line4');            
+        } else {
+            display.innerHTML += 
+                `<p id="line5"></p>
+                <p id="line6"></p>
+                <p id="line7"></p>`;
+            display.style['font-size'] = 'xx-large';
+            displayLines = document.querySelectorAll('#display p');
+            for (let x = 0; x < 7; x+=2) {
+                displayLines[x].style['text-align'] = 'left';
+            }
+            lineCount = 7;
+            inputLine = document.querySelector('#line7');
+        }        
+    });
+});
