@@ -99,7 +99,7 @@ function processOp(operation) {
         }
         // If op already exists, then we need to overwrite it on the display
         if (op)
-            overwrite(num1 + operation);
+            overwriteOp(operation);
         else
             write(operation);
         
@@ -142,26 +142,51 @@ function processSignChange() {
             num1 = "-" + num1;        
     }
     // overwrite the inputline to reflect the sign change
-    overwrite(num1 + op + num2);
+    overwrite();
 }
 
 function isNegative(num) {
     return num[0] == '-';        
 }
 
+// write text to the inputline
 function write(text) {
-    inputLine.innerText += text;
+    // if the text contains html (used for negative numbers), then we have to edit innerHTML instead of innerText
+    if (isNegative(num1) || isNegative(num2))
+        inputLine.innerHTML += text;
+    else
+        inputLine.innerText += text;
 }
 
-function overwrite(text) {
-    inputLine.innerText = text;
+// overwrite the inputline (used for changing the operation or sign)
+function overwrite(operation = op) {
+    text = formatNum(num1) + operation + formatNum(num2);
+
+    if (isNegative(num1) || isNegative(num2))
+        inputLine.innerHTML = text;
+    else
+        inputLine.innerText = text;
+}
+
+function formatNum(num) {
+    return isNegative(num) ? '<span class="neg">-</span>' + num.substring(1) : num;
 }
 
 function advanceLines() {
     for (let x = 1; x < 4; ++x) {
-        document.querySelector('#line'+x).innerText = document.querySelector('#line'+(x+1)).innerText;
+        var currLine = document.querySelector('#line'+x);
+        var nextLine = document.querySelector('#line'+(x+1));
+
+        if (hasHTML(nextLine))
+            currLine.innerHTML = nextLine.innerHTML;
+        else
+            currLine.innerText = nextLine.innerText;
     }
     inputLine.innerText = "";
+}
+
+function hasHTML(line) {
+    return line.innerHTML.includes('<');
 }
 
 function clearDisplay() {

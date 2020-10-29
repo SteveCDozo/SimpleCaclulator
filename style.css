@@ -36,6 +36,10 @@
   width: 344px;
   text-align: right;
 }
+#display .neg {
+  position: relative;
+  top: -5px;
+}
 
 
 #button-area {
