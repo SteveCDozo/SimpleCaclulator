@@ -298,3 +298,17 @@ document.querySelectorAll('.look-btn').forEach(button => {
         }
     });
 });
+
+// buttons to view different backgrounds (for debugging purposes)
+const bgNum = document.querySelector('#bg-num');
+document.querySelectorAll('#debug-bg button').forEach(button => {
+    button.addEventListener('click', () => {
+        var filename = "img/bg" + button.innerText + ".";
+        if (button.innerText == 1)
+            filename += "jpg";
+        else
+            filename += "png";
+        document.body.style.background = `url("${filename}")`;
+        bgNum.innerText = button.innerText;
+    });
+});
