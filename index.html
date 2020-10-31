@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <div id="calculator"> <!-- class="design-1-calc" -->
+    <div id="calculator">
         <div id="display-area">
             <div id="top">
                 <h3>CAZIO</h3>
@@ -24,7 +24,7 @@
                 <p id="line4"></p>
             </div>
         </div>
-        <div id="button-area" class="button-area"> <!-- class="design-1" -->
+        <div id="button-area">
             <button type="button" class="clear-btn" id="ac-btn">AC</button>
             <button type="button" class="clear-btn" id="c-btn">C</button>
             <button type="button" class="op-btn">+/-</button>
@@ -46,14 +46,11 @@
             <button type="button" class="op-btn">=</button>
         </div>
     </div>
-    <div id="debug-display-lines">
-        <h2>Current Active Line: <span id="debug-line-num">4</span></h2>
-        <button type="button" class="line-btn">1</button>
-        <button type="button" class="line-btn">2</button>
-        <button type="button" class="line-btn">3</button>
-        <button type="button" class="line-btn">4</button>
-        <br><br>
-        <button type="button" id="look-test">3d on</button>
+    <div id="debug-info">
+        <h2>Design Style:</h2>        
+        <button type="button" class="look-btn">2d</button>
+        <button type="button" class="look-btn">3d-1</button>
+        <button type="button" class="look-btn">3d-2</button>
         <button type="button" id="border-test">no border</button>
     </div>
     <script src="calc.js"></script>

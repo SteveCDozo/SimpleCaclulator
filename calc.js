@@ -1,5 +1,5 @@
 // get display and button elements
-var inputLine      = document.querySelector('#line4'); // should be changed to const once debugging the display lines is finished
+const inputLine    = document.querySelector('#line4');
 const displayLines = document.querySelectorAll('#display p'); 
 const numButtons   = document.querySelectorAll('.num-btn');
 const opButtons    = document.querySelectorAll('.op-btn');
@@ -43,15 +43,6 @@ document.addEventListener('keypress', event => {
     }
 });
 
-// buttons to select the current active line on the display (for debugging purposes)
-const activeLineNum = document.querySelector('#debug-line-num');
-document.querySelectorAll('.line-btn').forEach(button => {
-    button.addEventListener('click', () => {
-        inputLine = document.querySelector('#line'+button.innerText);
-        activeLineNum.innerText = button.innerText;
-    });
-});
-
 function clearDisplay() {
     displayLines.forEach((line) => {
         line.innerText = "";
@@ -80,16 +71,18 @@ borderButton.addEventListener('click', () => {
     }
 });
 
-// temporary button to view the 3d effect (for viewing different calculator looks)
-const lookButton = document.querySelector('#look-test');
-lookButton.addEventListener('click', () => {
-    if (lookButton.innerText == "3d on") {
-        document.querySelector('#calculator').className += ' design-1-calc';
-        document.querySelector('#button-area').className += ' design-1';
-        lookButton.innerText = "3d off";
-    } else {
-        document.querySelector('#calculator').className = '';
-        document.querySelector('#button-area').className = '';
-        lookButton.innerText = "3d on";
-    }
+// temporary buttons to view the 3d effect (for viewing different calculator looks)
+document.querySelectorAll('.look-btn').forEach(button => {
+    button.addEventListener('click', () => {
+        if (button.innerText == "2d") {
+            document.querySelector('#calculator').className = '';
+            document.querySelector('#button-area').className = '';
+        } else if (button.innerText == "3d-1") {
+            document.querySelector('#calculator').className = 'design-1-calc';
+            document.querySelector('#button-area').className = 'design-1';
+        } else if (button.innerText == "3d-2") {
+            document.querySelector('#calculator').className = 'design-2-calc';
+            document.querySelector('#button-area').className = 'design-2';
+        }
+    });
 });
