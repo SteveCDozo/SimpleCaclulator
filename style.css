@@ -1,31 +1,31 @@
 @font-face {
   font-family: calculatorFont1;
-  src: url(Calculator.ttf);
+  src: url(fonts/Calculator.ttf);
 }
 @font-face {
   font-family: calculatorFont2;
-  src: url(digital-7.ttf);
+  src: url(fonts/digital-7.ttf);
 }
 @font-face {
   font-family: calculatorFont3;
-  src: url(alarm_clock.ttf);
+  src: url(fonts/alarm_clock.ttf);
 }
 @font-face {
   font-family: calculatorFont4;
-  src: url(digital.ttf);
+  src: url(fonts/digital.ttf);
 }
 @font-face {
   font-family: calculatorFont5;
-  src: url(lcd.ttf);
+  src: url(fonts/lcd.ttf);
 }
 @font-face {
   font-family: calculatorFont6;
-  src: url(Technology.ttf);
+  src: url(fonts/Technology.ttf);
 }
 
 @font-face {
   font-family: calculatorFont7;
-  src: url(Seven.ttf);
+  src: url(fonts/Seven.ttf);
 }
 
 
@@ -63,6 +63,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  position: relative;
 }
 #display > p {
   height: 1em;
@@ -90,19 +91,20 @@
   grid-column: 4;
   grid-row: 4 / 6;
 }
-#button-area > button {  
+#button-area > button {
   border-radius: 10px;
   color: white;
   font-size: xx-large;
+  outline: none;
 }
 .num-btn {
   background-color: black;
 }
 .op-btn {
-  background-color: darkgray !important;
+  background-color: darkgray;
 }
 .clear-btn {
-  background-color: #B77587 !important;  /* or lightcoral? */
+  background-color: #B77587;  /* or lightcoral? */
 }
 
 
@@ -115,5 +117,126 @@
 }
 #debug-info > button {
   padding: 10px 20px;
-  margin: 0 5px;
+  margin: 0 5px;  
+}
+
+
+.design-1 > button {   
+  border-radius: 0px !important;
+  border-style: solid; 
+  position: relative;
+  top: -5px;
+  left: -5px;
+  transition: linear all 100ms;
+}
+.design-1 > .num-btn, .design-2 > .num-btn {
+  background-color: #2e2d2c;
+}
+.design-1 > .clear-btn::before, .design-2 > .clear-btn::before {
+  background-color: #7a4856;
+}
+.design-1 > .clear-btn::after {
+  background-color: #a06373;
+}
+.design-1 > .op-btn::before, .design-2 > .op-btn::before {
+  background-color: rgb(114, 113, 113);
+}
+.design-1 > .op-btn::after {
+  background-color: rgb(145, 144, 144);
+}
+.design-1 > button::before,
+.design-1 > button::after {
+  content: "";
+  position: absolute;
+  transition: linear all 100ms;
+}
+.design-1 > button::before {
+  background-color: black;
+  width: 105%;
+  height: 5px;
+  bottom: -7px;
+  left: 1px;
+  transform: skewX(45deg);
+}
+.design-1 > button::after {
+  background-color: #242221;
+  width: 5px;
+  height: 107%;
+  top: 1px;
+  right: -7px;
+  transform: skewY(45deg);
+}
+.design-1 > #plus::after {
+  height: 103%;
+}
+.design-1 > button:active {
+  transform: translate(3px, 3px);
+}
+.design-1 > button:active::before {
+  height: 2px;
+  transform: skewX(45deg) translate(1px, -3px);
+}
+.design-1 > button:active::after {
+  width: 2px;
+  transform: skewY(45deg) translate(-3px, 1px);
+}
+.design-1-calc {
+  box-shadow: 10px 10px rgb(77, 74, 74);
+  border-radius: 15px;
+}
+
+
+.design-2 > button {
+  border-style: solid; 
+  position: relative;
+  top: -0.3em;
+  transform-style: preserve-3d;
+  transition: .15s cubic-bezier(0, 0, 0.6, 1);
+  transform: translate3d(0, 0, 2em);
+}
+.design-2 > button::before {
+  background-color: black;
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: -2px;
+  left: -2px;
+  border-radius: inherit;
+  transform: translate3d(0, 0.3em, -1em);
+  border-style: solid;
+  border-width: 2px;
+  border-color: gray;
+  /*box-shadow: 0 0 0 2px gray, 0 0.625em 10px 0 #ffe3e2;*/
+  transition: .15s cubic-bezier(0, 0, 0.6, 1);
+}
+.design-2 > button:hover {
+  transform: translate3d(0, 0.05em, 2em);
+}
+.design-2 > button:hover::before {
+  transform: translate3d(0, 0.25em, -1em);
+  /*box-shadow: 0 0 0 2px gray, 0 0.5em 0 0 #ffe3e2;*/
+}
+.design-2 > button:active {
+  transform: translate(0, 0.25em);
+}
+.design-2 > button:active::before {
+  transform: translate3d(0, 0.05em, -1em);
+}
+/* 3d effect on the 'button-area' div */
+.design-2 {
+  position: relative;
+  transform-style: preserve-3d;
+}
+.design-2::before {
+  content: '';
+  background-color: gray;
+  position: absolute;
+  width: 100%;
+  height: 10%;
+  bottom: 0;
+  left: -3px;
+  transform: translate3d(0, 1.5em, -2em);
+  border-radius: inherit;
+  border-style: inherit;
 }
