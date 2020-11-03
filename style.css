@@ -97,6 +97,9 @@
   font-size: xx-large;
   outline: none;
 }
+.no-borders > button {
+  border: none;
+}
 .num-btn {
   background-color: black;
 }
@@ -108,22 +111,133 @@
 }
 
 
+#debug-toggle {
+  position: absolute;
+  top: 50px;
+  right: 50px;
+  padding: 7px;
+  border-radius: 50%;
+  border-style: solid;
+  border-width: 1px;
+  outline: none;
+}
+#debug-toggle > img {
+  width: 30px;
+  height: 30px;
+  vertical-align: middle;
+}
 #debug-info {
-  width: 400px;
-  margin: 0 auto;
+  width: 300px;
+  position: absolute;
+  top: 50px;
+  right: 200px;
+  background-color: rgb(238, 235, 235);
+  padding: 20px;
+  border: 2px solid black;
+  font-family: Arial;
+}
+#debug-info > h2 {
+  text-align: center;
+  margin-top: 10px;
+}
+#debug-info h4 {
+  display: inline-block;
+  margin: 10px 10px 10px 0;
+}
+#debug-info > div {
+  margin: 10px 0;
+}
+#debug-vars > div {
+  float: left;
+  width: 50%;
+}
+#debug-vars h4 {
+  display: block;
+}
+#debug-font > div {
+  display: inline-block;
+}
+#debug-font > div:nth-child(1) {
+  width: 15%;
+  vertical-align: top;
+}
+#debug-font > div:nth-child(2) {
+  width: 83%;
+}
+#debug-info label {
+  display: inline-block;
+  padding: 7px 14px;
+  margin: 2px;
+  border: 1px solid gray; 
+  border-radius: 6px; 
+}
+#debug-info input[type="radio"] {
+  display: none;
+}
+#debug-info input[type="radio"]:checked + label {
+  padding: 6px 13px;
+  border-width: 2px;
+  border-color: black;
+}
+#debug-borders > h4 {
+  display: inline-block;
+}
+#debug-borders .switch {
   position: relative;
-  top: -750px;
-  left: 450px;
+  display: inline-block;
+  width: 43px;
+  height: 25px;
+  padding: 0;
+  border: none;
+  vertical-align: middle;
 }
-#debug-info button {
-  padding: 10px 20px;
-  margin: 0 5px;  
+#debug-borders .switch > input {
+  opacity: 0;
+  width: 0;
+  height: 0;  
 }
+#debug-borders .switch > .slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+  border-radius: 34px;
+}
+#debug-borders .switch > .slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+  border-radius: 50%;
+}
+#debug-borders input:checked + .slider {
+  background-color: black;
+}
+#debug-borders input:focus + .slider {
+  box-shadow: 0 0 1px black;
+}
+#debug-borders input:checked + .slider:before {
+  -webkit-transform: translateX(19px);
+  -ms-transform: translateX(19px);
+  transform: translateX(19px);
+}
+
 
 
 .design-1 > button {   
   border-radius: 0px !important;
-  border-style: solid; 
+  border-style: solid;
+  border-width: 2px;
   position: relative;
   top: -5px;
   left: -5px;
@@ -131,6 +245,12 @@
 }
 .design-1 > .num-btn, .design-2 > .num-btn {
   background-color: #2e2d2c;
+}
+.design-1 > .num-btn::before, .design-2 > .num-btn::before {
+  background-color: black;
+}
+.design-1 > .num-btn::after {
+  background-color: #242221;
 }
 .design-1 > .clear-btn::before, .design-2 > .clear-btn::before {
   background-color: #7a4856;
@@ -144,6 +264,15 @@
 .design-1 > .op-btn::after {
   background-color: rgb(145, 144, 144);
 }
+.design-1.no-borders > .num-btn {
+  border-color: #2e2d2c;
+}
+.design-1.no-borders > .clear-btn {
+  border-color: #B77587;
+}
+.design-1.no-borders > .op-btn {
+  border-color: darkgray;
+}
 .design-1 > button::before,
 .design-1 > button::after {
   content: "";
@@ -151,15 +280,13 @@
   transition: linear all 100ms;
 }
 .design-1 > button::before {
-  background-color: black;
   width: 105%;
   height: 5px;
   bottom: -7px;
   left: 1px;
   transform: skewX(45deg);
 }
-.design-1 > button::after {
-  background-color: #242221;
+.design-1 > button::after {  
   width: 5px;
   height: 107%;
   top: 1px;
@@ -188,14 +315,17 @@
 
 .design-2 > button {
   border-style: solid; 
+  border-width: 2px;
   position: relative;
   top: -0.3em;
   transform-style: preserve-3d;
   transition: .15s cubic-bezier(0, 0, 0.6, 1);
   transform: translate3d(0, 0, 2em);
 }
+.design-2.no-borders > button {
+  border-style: none;
+}
 .design-2 > button::before {
-  background-color: black;
   content: '';
   position: absolute;
   width: 100%;
@@ -209,6 +339,11 @@
   border-color: gray;
   /*box-shadow: 0 0 0 2px gray, 0 0.625em 10px 0 #ffe3e2;*/
   transition: .15s cubic-bezier(0, 0, 0.6, 1);
+}
+.design-2.no-borders > button::before {
+  border-style: none;
+  top: 0px;
+  left: 0px;
 }
 .design-2 > button:hover {
   transform: translate3d(0, 0.05em, 2em);

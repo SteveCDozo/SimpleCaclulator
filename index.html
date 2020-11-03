@@ -46,34 +46,83 @@
             <button type="button" class="op-btn">=</button>
         </div>
     </div>
+    <button type="button" id="debug-toggle">
+        <img src="img/cog.png"></img>
+    </button>
     <div id="debug-info">
-        <h2>num1: <span id="debug-num1"></span></h2>
-        <h2>op: <span id="debug-op"></span></h2>
-        <h2>num2: <span id="debug-num2"></span></h2>
-        <h2>ans: <span id="debug-ans"></span></h2>    
-        <h2>Line style: <span id="debug-style-num">1</span></h2>
-        <button type="button" class="style-btn">1</button>
-        <button type="button" class="style-btn">2</button>
-        <h2>Font style: <span id="debug-font-num"></span></h2>
-        <button type="button" class="font-btn">0</button>
-        <button type="button" class="font-btn">1</button>
-        <button type="button" class="font-btn">2</button>
-        <button type="button" class="font-btn">3</button>
-        <button type="button" class="font-btn">4</button>
-        <button type="button" class="font-btn">5</button>
-        <button type="button" class="font-btn">6</button>
-        <button type="button" class="font-btn">7</button>        
-        <h2>Design Style:</h2>        
-        <button type="button" class="look-btn">2d</button>
-        <button type="button" class="look-btn">3d-1</button>
-        <button type="button" class="look-btn">3d-2</button>
-        <button type="button" id="border-test">no border</button>
+        <h2>DEBUG PANEL</h2>
+        <hr>
+        <div id="debug-vars">
+            <div>
+                <h4>num1: <span id="debug-num1"></span></h4>
+                <h4>op: <span id="debug-op"></span></h4>
+            </div>
+            <div>
+                <h4>num2: <span id="debug-num2"></span></h4>
+                <h4>ans: <span id="debug-ans"></span></h4>
+            </div>
+        </div>
+        <hr>
+        <div id="debug-display">
+            <h4>Display</h4>
+            <input type="radio" id="disp-1" name="disp" value="1" checked>
+            <label for="disp-1">1</label>
+            <input type="radio" id="disp-2" name="disp" value="2">            
+            <label for="disp-2">2</label>
+        </div>
+        <hr>
+        <div id="debug-font">
+            <div>
+                <h4>Font</h4>
+            </div>
+            <div>
+                <input type="radio" id="font-0" name="font" value="0" checked>
+                <label for="font-0">0</label>
+                <input type="radio" id="font-1" name="font" value="1">            
+                <label for="font-1">1</label>
+                <input type="radio" id="font-2" name="font" value="2">
+                <label for="font-2">2</label>
+                <input type="radio" id="font-3" name="font" value="3">            
+                <label for="font-3">3</label>
+                <input type="radio" id="font-4" name="font" value="4">
+                <label for="font-4">4</label>
+                <input type="radio" id="font-5" name="font" value="5">            
+                <label for="font-5">5</label>
+                <input type="radio" id="font-6" name="font" value="6">
+                <label for="font-6">6</label>
+                <input type="radio" id="font-7" name="font" value="7">            
+                <label for="font-7">7</label>
+            </div>
+        </div>
+        <hr>
+        <div id="debug-design">
+            <h4>Design</h4>
+            <input type="radio" id="des-0" name="des" value="0" checked>
+            <label for="des-0">2D</label>
+            <input type="radio" id="des-1" name="des" value="1">
+            <label for="des-1">3D-1</label>    
+            <input type="radio" id="des-2" name="des" value="2">
+            <label for="des-2">3D-2</label>
+        </div>
+        <hr>
+        <div id="debug-borders">
+            <h4>Button Borders</h4>
+            <label class="switch">
+                <input type="checkbox" id="abc" checked>
+                <span class="slider"></span>            
+            </label>
+        </div>
+        <hr>
         <div id="debug-bg">
-            <h2>Background: <span id="bg-num">1</span></h2>
-            <button type="button">1</button>
-            <button type="button">2</button>
-            <button type="button">3</button>
-            <button type="button">4</button>
+            <h4>Background</h4>
+            <input type="radio" id="bg-1" name="bg" value="1">
+            <label for="bg-1">1</label>
+            <input type="radio" id="bg-2" name="bg" value="2">
+            <label for="bg-2">2</label>
+            <input type="radio" id="bg-3" name="bg" value="3">
+            <label for="bg-3">3</label>
+            <input type="radio" id="bg-4" name="bg" value="4">
+            <label for="bg-4">4</label>
         </div>
     </div>
     <script src="calc.js"></script>

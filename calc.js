@@ -11,14 +11,6 @@ const acButton     = document.querySelector('#ac-btn');
 
 var num1 = "", num2 = "", op = "", ans = "0";
 
-
-// for debugging
-const debugOp   = document.querySelector('#debug-op');
-const debugAns  = document.querySelector('#debug-ans');
-const debugNum1 = document.querySelector('#debug-num1');
-const debugNum2 = document.querySelector('#debug-num2');
-
-
 // add listeners to buttons
 numButtons.forEach(button => {
     button.addEventListener('mousedown', () => {
@@ -47,9 +39,9 @@ acButton.addEventListener('mousedown', () => {
 // the valid keys that can be pressed on the keyboard
 const validKeys = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.', '+', '-', '*', '/', '=']; //, 'Enter'];
 document.addEventListener('keypress', event => {
-    if (validKeys.includes(event.key))
-        inputLine.innerText += event.key;
-    else if (event.key == 'Enter') {
+    if (validKeys.includes(event.key)) {
+        write(event.key);
+    } else if (event.key == 'Enter') {
         for (let x = 1; x < 4; ++x) {
             document.querySelector('#line'+x).innerText = document.querySelector('#line'+(x+1)).innerText;
         }
@@ -147,6 +139,15 @@ function isNegative(num) {
     return num[0] == '-';        
 }
 
+function write(text) {
+    var currentText = inputLine.innerText;
+    inputLine.innerText = "";
+    window.setTimeout(() => {
+        inputLine.innerText = currentText + text;
+    }, 200);
+}
+
+
 // write text to the inputline
 function write(text) {
     // if the text contains html (used for negative numbers), then we have to edit innerHTML instead of innerText
@@ -206,6 +207,18 @@ function clearMemory() {
     updateDebugInfo();
 }
 
+
+// for debugging
+const debugOp     = document.querySelector('#debug-op');
+const debugAns    = document.querySelector('#debug-ans');
+const debugNum1   = document.querySelector('#debug-num1');
+const debugNum2   = document.querySelector('#debug-num2');
+const debugInfo   = document.querySelector("#debug-info");
+const debugToggle = document.querySelector('#debug-toggle');
+const display     = document.querySelector('#display');
+const calculator  = document.querySelector('#calculator');
+const buttonArea  = document.querySelector('#button-area');
+
 function updateDebugInfo() {
     debugOp.innerText   = op;
     debugAns.innerText  = ans;
@@ -213,17 +226,23 @@ function updateDebugInfo() {
     debugNum2.innerText = num2;    
 }
 
+// toggle the display-info panel
+debugToggle.addEventListener('click', () => {
+    var state = debugInfo.style.display;
+    if (state === '' || state === 'block')
+        debugInfo.style.display = 'none';
+    else
+        debugInfo.style.display = 'block';
+});
 
-// buttons to select the current line style on the display (for debugging purposes)
-const activeStyleNum = document.querySelector('#debug-style-num');
-document.querySelectorAll('.style-btn').forEach(button => {
-    button.addEventListener('click', () => {
-        activeStyleNum.innerText = button.innerText;        
-        const display = document.querySelector('#display');
+// buttons to view different display styles
+document.querySelectorAll('#debug-display > input').forEach(button => {
+    button.addEventListener('click', () => {   
+        
         clearDisplay();
         clearMemory();
 
-        if (button.innerText == 1) {
+        if (button.value === '1') {
             display.innerHTML = 
                 `<p id="line1"></p>
                 <p id="line2"></p>
@@ -232,8 +251,8 @@ document.querySelectorAll('.style-btn').forEach(button => {
             display.style['font-size'] = 'xxx-large';
             displayLines = document.querySelectorAll('#display p');
             lineCount = 4;
-            inputLine = document.querySelector('#line4');            
-        } else {
+            inputLine = document.querySelector('#line4');          
+        } else if (button.value === '2') {
             display.innerHTML += 
                 `<p id="line5"></p>
                 <p id="line6"></p>
@@ -245,70 +264,56 @@ document.querySelectorAll('.style-btn').forEach(button => {
             }
             lineCount = 7;
             inputLine = document.querySelector('#line7');
-        }        
+        }       
     });
 });
 
-// buttons to select the current line style on the display (for debugging purposes)
-const activeFontNum = document.querySelector('#debug-font-num');
-document.querySelectorAll('.font-btn').forEach(button => {
+// buttons to view different display fonts
+document.querySelectorAll('#debug-font input').forEach(button => {
     button.addEventListener('click', () => {
-        activeFontNum.innerText = button.innerText;
-        const display = document.querySelector('#display');
-        if (button.innerText == 0)
+        if (button.value === '0')
             display.style['font-family'] = 'Times New Roman';
         else
-            display.style['font-family'] = 'calculatorFont'+button.innerText;                
+            display.style['font-family'] = 'calculatorFont'+button.value;                
     });
 });
-// temporary button to remove/add borders (for viewing different calculator looks)
-const borderButton = document.querySelector('#border-test');
-borderButton.addEventListener('click', () => {
-    if (borderButton.innerText == "no border") {
-        document.querySelectorAll('.design-1 .clear-btn').forEach(button => {
-            button.style['border-color'] = "#B77587";
-        });
-        document.querySelectorAll('.design-1 .op-btn').forEach(button => {
-            button.style['border-color'] = "darkgray";
-        });
-        document.querySelectorAll('.design-1 .num-btn').forEach(button => {
-            button.style['border-color'] = "#2e2d2c";
-        });
-        borderButton.innerText = "add border";
-    } else {
-        document.querySelectorAll('.design-1 button').forEach(button => {
-            button.style['border-color'] = "gray";
-        });
-        borderButton.innerText = "no border";
-    }
-});
 
-// temporary buttons to view the 3d effect (for viewing different calculator looks)
-document.querySelectorAll('.look-btn').forEach(button => {
+// buttons to view the different 3d effects
+document.querySelectorAll('#debug-design > input').forEach(button => {
     button.addEventListener('click', () => {
-        if (button.innerText == "2d") {
-            document.querySelector('#calculator').className = '';
-            document.querySelector('#button-area').className = '';
-        } else if (button.innerText == "3d-1") {
-            document.querySelector('#calculator').className = 'design-1-calc';
-            document.querySelector('#button-area').className = 'design-1';
-        } else if (button.innerText == "3d-2") {
-            document.querySelector('#calculator').className = 'design-2-calc';
-            document.querySelector('#button-area').className = 'design-2';
+        if (button.value === "0") {
+            calculator.classList.remove('design-1-calc', 'design-2-calc');
+            buttonArea.classList.remove('design-1', 'design-2');
+        } else if (button.value === "1") {
+            calculator.classList.remove('design-2-calc');
+            calculator.classList.add('design-1-calc');
+            buttonArea.classList.remove('design-2');            
+            buttonArea.classList.add('design-1');
+        } else if (button.value === "2") {
+            calculator.classList.remove('design-1-calc');
+            calculator.classList.add('design-2-calc');
+            buttonArea.classList.remove('design-1');            
+            buttonArea.classList.add('design-2');
         }
     });
 });
 
-// buttons to view different backgrounds (for debugging purposes)
-const bgNum = document.querySelector('#bg-num');
-document.querySelectorAll('#debug-bg button').forEach(button => {
+// toggle to show/hide button borders
+document.querySelector('#debug-borders input').addEventListener('click', function() {
+    if (this.checked) // show borders
+        buttonArea.classList.remove('no-borders');        
+    else // hide borders
+        buttonArea.classList.add('no-borders');    
+});
+
+// buttons to view different backgrounds
+document.querySelectorAll('#debug-bg > input').forEach(button => {
     button.addEventListener('click', () => {
-        var filename = "img/bg" + button.innerText + ".";
-        if (button.innerText == 1)
+        var filename = "img/bg" + button.value + ".";
+        if (button.value == 1)
             filename += "jpg";
         else
             filename += "png";
         document.body.style.background = `url("${filename}")`;
-        bgNum.innerText = button.innerText;
     });
 });
