@@ -1,4 +1,4 @@
-const ADD = "+", SUB = "-", MULT = "×", DIV = "÷", SIGN = "+/-", EQ = "=";
+const ADD = '+', SUB = '-', MULT = '×', DIV = '÷', SIGN = '+/-', EQ = '=';
 
 // get display and button elements
 var inputLine      = document.querySelector('#line4');
@@ -9,7 +9,7 @@ const opButtons    = document.querySelectorAll('.op-btn');
 const cButton      = document.querySelector('#c-btn');
 const acButton     = document.querySelector('#ac-btn');
 
-var num1 = "", num2 = "", op = "", ans = "0";
+var num1 = '', num2 = '', op = '', ans = '0';
 
 // add listeners to buttons
 numButtons.forEach(button => {
@@ -26,7 +26,7 @@ opButtons.forEach(button => {
 
 // clear button will clear the current line for now
 cButton.addEventListener('mousedown', () => {
-    inputLine.innerText = "";
+    inputLine.innerText = '';
     clearNumOp();    
 });
 
@@ -41,11 +41,11 @@ const validKeys = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.', '+', '
 document.addEventListener('keypress', event => {
     if (validKeys.includes(event.key)) {
         write(event.key);
-    } else if (event.key == 'Enter') {
+    } else if (event.key === 'Enter') {
         for (let x = 1; x < 4; ++x) {
             document.querySelector('#line'+x).innerText = document.querySelector('#line'+(x+1)).innerText;
         }
-        inputLine.innerText = "";
+        inputLine.innerText = '';
     }
 });
 
@@ -54,7 +54,7 @@ function processNum(digit) {
     write(digit);
     // if an operation is already registered, then this digit is part of the second number
     // otherwise it is part of the first number
-    if (op == "")
+    if (op === '')
         num1 += digit;
     else
         num2 += digit;
@@ -62,12 +62,12 @@ function processNum(digit) {
 }
 
 function processOp(operation) {
-    if (operation == EQ) {
-        // Ignore "=" if expression is not complete
+    if (operation === EQ) {
+        // Ignore '=' if expression is not complete
         if (num1 && op && num2) {
             processExpression();
         }
-    } else if (operation == SIGN) {
+    } else if (operation === SIGN) {
         processSignChange();
     } else {
         // If second number exists, process current expression, and set num1 to the answer    
@@ -93,20 +93,20 @@ function processOp(operation) {
 }
 
 function processExpression() {
-    ans = "";
-    if (op == ADD)
+    ans = '';
+    if (op === ADD)
         ans += (+num1) + (+num2); // using unary plus operator to convert string to number
-    else if (op == SUB)
+    else if (op === SUB)
         ans += (+num1) - (+num2);
-    else if (op == MULT)
+    else if (op === MULT)
         ans += (+num1) * (+num2);
-    else if (op == DIV)
+    else if (op === DIV)
         ans += (+num1) / (+num2);
     else
-        ans = "ERROR";
+        ans = 'ERROR';
 
     if (lineCount == 4) {
-        write("=" + ans);
+        write('=' + ans);
         advanceLines(); // Move this expression into the log now
     } else {
         advanceLines();
@@ -122,26 +122,26 @@ function processSignChange() {
         if (isNegative(num2))
             num2 = num2.substring(1);
         else
-            num2 = "-" + num2;
+            num2 = '-' + num2;
     } 
     // otherwise, switch the sign of num1 
     else  {
         if (isNegative(num1))
             num1 = num1.substring(1);
         else
-            num1 = "-" + num1;        
+            num1 = '-' + num1;        
     }
     // overwrite the inputline to reflect the sign change
     overwrite();
 }
 
 function isNegative(num) {
-    return num[0] == '-';        
+    return num[0] === '-';        
 }
 
 function write(text) {
     var currentText = inputLine.innerText;
-    inputLine.innerText = "";
+    inputLine.innerText = '';
     window.setTimeout(() => {
         inputLine.innerText = currentText + text;
     }, 200);
@@ -181,7 +181,7 @@ function advanceLines() {
         else
             currLine.innerText = nextLine.innerText;
     }
-    inputLine.innerText = "";
+    inputLine.innerText = '';
 }
 
 function hasHTML(line) {
@@ -190,20 +190,20 @@ function hasHTML(line) {
 
 function clearDisplay() {
     displayLines.forEach((line) => {
-        line.innerText = "";
+        line.innerText = '';
     });
 }
 
 function clearNumOp() {
-    op = "";
-    num1 = "";
-    num2 = "";
+    op = '';
+    num1 = '';
+    num2 = '';
     updateDebugInfo();
 }
 
 function clearMemory() {
     clearNumOp();
-    ans = "0";
+    ans = '0';
     updateDebugInfo();
 }
 
@@ -213,7 +213,7 @@ const debugOp     = document.querySelector('#debug-op');
 const debugAns    = document.querySelector('#debug-ans');
 const debugNum1   = document.querySelector('#debug-num1');
 const debugNum2   = document.querySelector('#debug-num2');
-const debugInfo   = document.querySelector("#debug-info");
+const debugInfo   = document.querySelector('#debug-info');
 const debugToggle = document.querySelector('#debug-toggle');
 const display     = document.querySelector('#display');
 const calculator  = document.querySelector('#calculator');
@@ -281,15 +281,15 @@ document.querySelectorAll('#debug-font input').forEach(button => {
 // buttons to view the different 3d effects
 document.querySelectorAll('#debug-design > input').forEach(button => {
     button.addEventListener('click', () => {
-        if (button.value === "0") {
+        if (button.value === '0') {
             calculator.classList.remove('design-1-calc', 'design-2-calc');
             buttonArea.classList.remove('design-1', 'design-2');
-        } else if (button.value === "1") {
+        } else if (button.value === '1') {
             calculator.classList.remove('design-2-calc');
             calculator.classList.add('design-1-calc');
             buttonArea.classList.remove('design-2');            
             buttonArea.classList.add('design-1');
-        } else if (button.value === "2") {
+        } else if (button.value === '2') {
             calculator.classList.remove('design-1-calc');
             calculator.classList.add('design-2-calc');
             buttonArea.classList.remove('design-1');            
@@ -309,11 +309,11 @@ document.querySelector('#debug-borders input').addEventListener('click', functio
 // buttons to view different backgrounds
 document.querySelectorAll('#debug-bg > input').forEach(button => {
     button.addEventListener('click', () => {
-        var filename = "img/bg" + button.value + ".";
-        if (button.value == 1)
-            filename += "jpg";
+        var filename = 'img/bg' + button.value + '.';
+        if (button.value === '1')
+            filename += 'jpg';
         else
-            filename += "png";
+            filename += 'png';
         document.body.style.background = `url("${filename}")`;
     });
 });
