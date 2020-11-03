@@ -298,6 +298,11 @@ document.querySelectorAll('#debug-design > input').forEach(button => {
     });
 });
 
+// toggle to show/hide display shadow
+document.querySelector('#debug-shadow input').addEventListener('click', function() {
+    display.classList.toggle('shadow');
+});
+
 // toggle to show/hide button borders
 document.querySelector('#debug-borders input').addEventListener('click', function() {
     if (this.checked) // show borders

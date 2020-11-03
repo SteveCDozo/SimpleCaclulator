@@ -63,7 +63,10 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  position: relative;
+  position: relative;  
+}
+#display.shadow {
+  box-shadow: 0 0 4px 4px gray inset;
 }
 #display > p {
   height: 1em;
@@ -128,6 +131,7 @@
   vertical-align: middle;
 }
 #debug-info {
+  display: none;
   width: 300px;
   position: absolute;
   top: 72px;
