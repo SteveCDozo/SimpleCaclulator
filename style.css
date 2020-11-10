@@ -99,6 +99,7 @@
   color: white;
   font-size: xx-large;
   outline: none;
+  cursor: pointer;
 }
 .no-borders > button {
   border: none;
